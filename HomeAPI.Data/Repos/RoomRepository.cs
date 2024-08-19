@@ -17,6 +17,11 @@ namespace HomeAPI.Data.Repos
             return await _context.Rooms.Where(r => r.Name == name).FirstOrDefaultAsync();
         }
 
+        public async Task<Room> GetRoomById(Guid id)
+        {
+            return await _context.Rooms.Where(r => r.Id == id).FirstOrDefaultAsync();
+        }
+
         public async Task AddRoom(Room room)
         {
             var entry = _context.Entry(room);
@@ -31,6 +36,20 @@ namespace HomeAPI.Data.Repos
             return await _context.Rooms
                 .Include(r => r.Name)
                 .ToArrayAsync();
+        }
+
+        public async Task UpdateRoom(Room room)
+        {
+            Room roomUpdate = _context.Rooms.Where(r => r.Id == room.Id).FirstOrDefault();
+            roomUpdate.Name = room.Name;
+            roomUpdate.Area = room.Area;
+            roomUpdate.GasConnected = room.GasConnected;
+            roomUpdate.Voltage = room.Voltage;
+
+            var entry = _context.Entry(roomUpdate);
+            if (entry.State == EntityState.Detached)
+                _context.Rooms.Update(roomUpdate);
+            await _context.SaveChangesAsync();
         }
     }
 }
