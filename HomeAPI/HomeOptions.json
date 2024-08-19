@@ -1,0 +1,14 @@
+﻿{
+  "FloorAmount": 2,
+  "Telephone": "+79261123455",
+  "Heating": "Gas",
+  "CurrentVolts": 220,
+  "GasConnected": true,
+  "Area": 250,
+  "Material": "Brick",
+  "Address" : {
+    "House" : 34,
+    "Building": 2,
+    "Street" : "Pushkina"
+  }
+}
